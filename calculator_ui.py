@@ -3,6 +3,7 @@ from keypad import Keypad
 import tkinter as tk
 from tkinter import ttk
 from math import *
+import pygame
 
 
 class CalculatorUI(tk.Tk):
@@ -18,12 +19,15 @@ class CalculatorUI(tk.Tk):
         self.clr = tk.Button(self, text='CLR', command=self.clear)
         self.delete = tk.Button(self, text='DEL', command=self.delete)
         self.math_func = ttk.Combobox(self)
+        self.sound = None
         self.init_component()
 
     def init_component(self):
         self.keypad.bind('<Button>', self.handler)
         self.operator_pad.bind('<Button>', self.handler)
         self.math_func.bind('<<ComboboxSelected>>', self.func_handler)
+        pygame.mixer.init()
+        self.sound = pygame.mixer.Sound('notification_sound.mp3')
 
         self.history.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
         self.display.pack(side=tk.TOP, expand=True, fill=tk.BOTH)
@@ -69,6 +73,7 @@ class CalculatorUI(tk.Tk):
         except Exception:
             result = "Invalid Result"
             self.display.config(text=result, fg='red')
+            self.sound.play()
             return
         self.display.config(text=result)
         self.history.config(text=history)
