@@ -1,3 +1,4 @@
+import math
 from keypad import Keypad
 import tkinter as tk
 from tkinter import ttk
@@ -41,14 +42,14 @@ class CalculatorUI(tk.Tk):
         if text[-1] == '=':
             self.calculate()
             return
-        self.display.config(text=text)
+        self.display.config(text=text, fg='yellow')
 
     def func_handler(self, event):
         num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
         choice = self.math_func.get()
         text = self.display['text']
         check = text[-1] if text else None
-        if not text or check is None or check in self.operator:
+        if not text or check in self.operator:
             text += choice + '('
             self.display.config(text=text)
         elif check in num:
@@ -61,7 +62,7 @@ class CalculatorUI(tk.Tk):
         text = text.replace('cos', 'math.cos')
         text = text.replace('tan', 'math.tan')
         text = text.replace('ln', 'math.log')
-        text = text.replace('log', 'math.log({}, 10)'.format(self.get_number()))
+        text = text.replace('log', 'math.log10')
         try:
             result = eval(text)
             history = self.history['text'] + '\n' + text + '=' + str(result)
@@ -71,14 +72,6 @@ class CalculatorUI(tk.Tk):
             return
         self.display.config(text=result)
         self.history.config(text=history)
-
-    def get_number(self):
-        expression = self.display['text']
-        number = ""
-        for char in expression:
-            if char.isdigit() or char == '.':
-                number += char
-        return number
 
     def clear(self):
         self.display.config(text='', fg='yellow')
