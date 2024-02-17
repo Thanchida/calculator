@@ -10,7 +10,7 @@ class CalculatorUI(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('Calculator')
-        self.geometry('325x300')
+        self.geometry('400x400')
         self.display = tk.Label(self, text='', bg='black', fg='yellow', font=('monospace', 30), anchor=tk.E)
         self.history = tk.Label(self, text='', bg='lightgrey', fg='grey', font=('monospace', 15), anchor=tk.E)
         self.keypad = Keypad(self, list('789456123 0.'), 3)
