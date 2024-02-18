@@ -56,7 +56,7 @@ class CalculatorUI(tk.Tk):
     def func_handler(self, event):
         num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
         choice = self.math_func.get()
-        text = self.display['text']
+        text = str(self.display['text'])
         check = text[-1] if text else None
         if not text or check in self.operator:
             text += choice + '('
@@ -66,13 +66,12 @@ class CalculatorUI(tk.Tk):
             self.display.config(text=new, fg='yellow')
 
     def calculate(self):
-        check = True
         text = self.display['text']
         text = text.replace('sin', 'math.sin')
         text = text.replace('cos', 'math.cos')
         text = text.replace('tan', 'math.tan')
-        text = text.replace('ln', 'math.log')
         text = text.replace('log', 'math.log')
+        text = text.replace('ln', 'math.log')
         try:
             result = eval(text)
             history = self.display['text'] + '=' + str(result)
