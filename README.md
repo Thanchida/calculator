@@ -1,4 +1,4 @@
 # calculator
-![UML Class Diagram](Calculator_Diagram.png)
+![UML Class Diagram](Diagram.png)
 # How to run
 - main.py
