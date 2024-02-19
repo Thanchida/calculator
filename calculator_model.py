@@ -4,7 +4,6 @@ from math import *
 
 class CalculatorModel:
     def __init__(self, view):
-        self.play = ''
         self.history = []
         self.view = view
 
